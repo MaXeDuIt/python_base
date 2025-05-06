@@ -10,5 +10,17 @@
 #   Студенту надо попросить ХХХ.ХХ рублей
 
 educational_grant, expenses = 10000, 12000
+parents = 0
+month = 1
+percent_expenses = 0.03
 
-# TODO здесь ваш код
+while month <= 10:
+    if month == 1:
+        parents = expenses - educational_grant
+        month += 1
+        continue
+    expenses += expenses * percent_expenses
+    parents += expenses - educational_grant
+    month += 1
+
+print('Студенту надо попросить', round(parents, 2), 'рублей')
