@@ -9,5 +9,11 @@
 #   Целочисленное деление ХХХ на YYY дает ZZZ
 
 a, b = 179, 37
+integer_part = 0
 
-# TODO здесь ваш код
+while a > b:
+    a = a - b
+    integer_part += 1
+
+print('Целочисленное деление 179 на 37 дает', integer_part)
+print('Остаток от деления', a)
