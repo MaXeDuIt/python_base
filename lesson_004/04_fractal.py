@@ -26,7 +26,51 @@ import simple_draw as sd
 
 # можно поиграть -шрифтами- цветами и углами отклонения
 
-# TODO здесь ваш код
+# 1)
+# def draw_branches(point, angle, length):
+#     v1 = sd.get_vector(start_point=point, angle=angle, length=length)
+#     v1.draw()
+#     return v1.end_point
+#
+# root_point = sd.get_point(300, 30)
+# angle_0 = 90
+# length_0 = 100
+#
+# next_point_1 = root_point
+# next_point_2 = root_point
+# next_angle_right = angle_0
+# next_angle_left = angle_0
+# next_length = length_0
+#
+# for i in range(5):
+#     next_point_1 = draw_branches(point=next_point_1, angle=next_angle_right, length=next_length)
+#     next_point_2 = draw_branches(point=next_point_2, angle=next_angle_left, length=next_length)
+#     next_angle_right -= 30
+#     next_angle_left += 30
+#     next_length -= 20
+
+
+# 2)
+# def draw_branches(point, angle, length, delta):
+#     if length < 2:
+#         return
+#     v1 = sd.get_vector(start_point=point, angle=angle, length=length)
+#     v1.draw()
+#     next_point = v1.end_point
+#     next_angle_right = angle - delta
+#     next_angle_left = angle + delta
+#     next_length = length * .75
+#     draw_branches(point=next_point, angle=next_angle_right, length=next_length, delta = delta)
+#     draw_branches(point=next_point, angle=next_angle_left, length=next_length, delta=delta)
+#
+#
+# root_point = sd.get_point(300, 30)
+# angle_0 = 90
+# length_0 = 100
+# delta_0 = 30
+#
+# draw_branches(point=root_point, angle=angle_0, length=length_0, delta=delta_0)
+
 
 # 4) Усложненное задание (делать по желанию)
 # - сделать рандомное отклонение угла ветвей в пределах 40% от 30-ти градусов
@@ -36,6 +80,32 @@ import simple_draw as sd
 # Пригодятся функции
 # sd.random_number()
 
+sd.resolution = (1200, 1000)
+
+def draw_branches(point, angle, length):
+    if length < 5:
+        return
+
+    v1 = sd.get_vector(start_point=point, angle=angle, length=length)
+    v1.draw()
+
+    next_point = v1.end_point
+
+    delta = sd.random_number(18, 42)
+    next_angle_right = angle - delta
+    next_angle_left = angle + delta
+
+    gamma = sd.random_number(60, 90) / 100
+    next_length = length * gamma
+
+    draw_branches(point=next_point, angle=next_angle_right, length=next_length)
+    draw_branches(point=next_point, angle=next_angle_left, length=next_length)
+
+
+root_point = sd.get_point(600, 30)
+angle_0 = 90
+length_0 = 200
+
+draw_branches(point=root_point, angle=angle_0, length=length_0)
+
 sd.pause()
-
-
